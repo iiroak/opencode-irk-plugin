@@ -1,0 +1,32 @@
+{
+  "name": "opencode-irk-plugin",
+  "version": "0.1.0",
+  "description": "Live token and throughput metrics for the OpenCode TUI.",
+  "type": "module",
+  "main": "./src/tui.tsx",
+  "exports": {
+    ".": "./src/tui.tsx",
+    "./tui": "./src/tui.tsx"
+  },
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test test/*.test.ts"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.18.9",
+    "@opentui/core": ">=0.4.5",
+    "@opentui/solid": ">=0.4.5"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "1.18.9",
+    "@opencode-ai/sdk": "1.18.9",
+    "@opentui/core": "0.4.5",
+    "@opentui/keymap": "0.4.5",
+    "@opentui/solid": "0.4.5",
+    "@types/node": "22.10.2",
+    "solid-js": "1.9.12",
+    "typescript": "5.7.2"
+  }
+}
