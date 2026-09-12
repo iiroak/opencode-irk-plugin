@@ -161,6 +161,32 @@ test("queries the usage endpoint with sanitized headers and parses the response"
   assert.equal(usage.credits?.hasCredits, false)
 })
 
+test("uses OPENCODE_AUTH_CONTENT when the auth file is unavailable", async () => {
+  const previous = process.env.OPENCODE_AUTH_CONTENT
+  process.env.OPENCODE_AUTH_CONTENT = makeAuth()
+  try {
+    const client = new CodexClient({
+      authFile: "/tmp/missing-opencode-auth.json",
+      now: () => 1_700_000_000_000,
+      async fetch() {
+        return {
+          ok: true,
+          status: 200,
+          async json() {
+            return { plan_type: "plus" }
+          },
+        }
+      },
+    })
+
+    const usage = await client.readUsage()
+    assert.equal(usage.planType, "plus")
+  } finally {
+    if (previous === undefined) delete process.env.OPENCODE_AUTH_CONTENT
+    else process.env.OPENCODE_AUTH_CONTENT = previous
+  }
+})
+
 test("refreshes the token once when the access is about to expire", async () => {
   const now = 1_700_000_000_000
   const auth = makeAuth({ access: "stale-access", refresh: "rt-old", expires: now + 30_000 })

@@ -131,7 +131,7 @@ export class CodexClient {
     this.now = options.now ?? Date.now
     this.home = options.home ?? homedir()
     this.authFile = options.authFile ?? join(this.home, ".local", "share", "opencode", "auth.json")
-    this.opencodeAuthContent = options.opencodeAuthContent
+    this.opencodeAuthContent = options.opencodeAuthContent ?? process.env.OPENCODE_AUTH_CONTENT
     this.refreshAccessToken =
       options.refreshAccessToken ??
       ((refreshToken) =>

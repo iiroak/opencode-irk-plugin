@@ -37,9 +37,9 @@ If OpenCode has no `openai` credential, the credential is an API key, or the acc
 Install dependencies and check the package:
 
 ```bash
-npm install
-npm run typecheck
-npm test
+pnpm install
+pnpm run typecheck
+pnpm test
 ```
 
 Add the plugin to `~/.config/opencode/tui.json` (keep existing entries):
